@@ -1,0 +1,30 @@
+version: '3.7'
+services:
+  jenkins:
+    privileged: true
+    image: salimfadhley/jenkins:latest
+    build:
+      context: .
+      target: jenkins
+
+    labels:
+      kompose.service.type: nodeport
+    ports:
+      - '80:8080'
+      - '443:8443'
+      - '50000:50000'
+    volumes:
+      - 'jenkins_data:/bitnami/jenkins'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    environment:
+      JENKINS_PASSWORD: "password"
+
+  agent0:
+    build:
+      context: .
+      target: jenkinsslave
+    image: salimfadhley/jenkinsslave:latest
+
+volumes:
+  jenkins_data:
+    driver: local
