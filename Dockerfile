@@ -16,7 +16,7 @@ RUN add-apt-repository \
        stable"
 RUN apt-get update
 RUN apt-get install -y docker-ce docker-ce-cli containerd.io
-RUN python -m pip install docker-compose
+RUN python3 -m pip install docker-compose
 
 
 COPY src/jenkins_tmp /tmp/jenkins_tmp
