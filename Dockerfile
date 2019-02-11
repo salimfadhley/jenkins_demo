@@ -9,7 +9,6 @@ RUN apt-get update -y && apt-get install -y \
        software-properties-common \
        less && \
        rm -rf /var/lib/apt/lists/*
-
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 RUN add-apt-repository \
        "deb [arch=amd64] https://download.docker.com/linux/debian \
@@ -17,6 +16,9 @@ RUN add-apt-repository \
        stable"
 RUN apt-get update
 RUN apt-get install -y docker-ce docker-ce-cli containerd.io
+RUN python -m pip install docker-compose
+
+
 COPY src/jenkins_tmp /tmp/jenkins_tmp
 RUN install-plugins.sh docker-slaves ssh-agent
 RUN rm -rf /tmp/jenkins_tmp
