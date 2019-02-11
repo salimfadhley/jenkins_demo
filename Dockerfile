@@ -2,6 +2,7 @@ FROM jenkins/jenkins AS jenkins
 USER root
 RUN apt-get update -y
 RUN apt-get update -y && apt-get install -y \
+       python3 \
        apt-transport-https \
        ca-certificates \
        curl \
